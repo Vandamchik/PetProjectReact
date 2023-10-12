@@ -1,11 +1,12 @@
-import React from "react";
-import styles from './App.module.scss';
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import { publicRoutes } from './routes.tsx';
+
+
+const routerPublic = createBrowserRouter(publicRoutes)
 
 export const App: React.FC = () => {
-  return (
-    <h1 className={styles.text}>
-      Hello
-    </h1>
-  )
+  return <RouterProvider router={routerPublic} />
 }
 
