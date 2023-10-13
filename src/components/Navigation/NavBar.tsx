@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 
-interface INavBar extends HTMLAttributes<HTMLElement> {}
 
+interface INavBar extends HTMLAttributes<HTMLElement> {}
 
 export const NavBar:React.FC<INavBar> = ({ children,className }) => {
 

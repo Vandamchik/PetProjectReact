@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 
-interface IMainHeader extends HTMLAttributes<HTMLElement> {}
 
+interface IMainHeader extends HTMLAttributes<HTMLElement> {}
 
 export const MainHeader:React.FC<IMainHeader> = ({ children,className }) => {
 
