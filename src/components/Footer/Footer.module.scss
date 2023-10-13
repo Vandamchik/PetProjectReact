@@ -1,0 +1,16 @@
+.container {
+  width: auto;
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px solid black;
+  background-image: linear-gradient(to right, #9d9b9b , #ff6a00);
+
+  .cells {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
