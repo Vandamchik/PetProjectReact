@@ -19,7 +19,7 @@ export const NavLinks:React.FC = () => {
             </li>
             <li>
                 <NavLink
-                    to='/favorites'
+                    to='favorites'
                     className={ ({ isActive })  =>
                         isActive ? styles.active : undefined
                     }
@@ -27,7 +27,7 @@ export const NavLinks:React.FC = () => {
             </li>
             <li>
                 <NavLink
-                    to='/auth'
+                    to='auth'
                     className={ ({ isActive })  =>
                         isActive ? styles.active : undefined
                     }
