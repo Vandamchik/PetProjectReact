@@ -1,14 +1,14 @@
-import React from 'react';
+import { FC } from 'react';
 import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 
 import { MainNavigation } from "../../components/Navigation/MainNavigation.tsx";
-import { TextContent } from "../../UI/TextContent.tsx";
+import { TitleContent } from "../../UI/Content/TitleContent.tsx";
 import { Footer } from "../../components/Footer/Footer.tsx";
 
 import styles from './ErrorPage.module.scss';
 import { TError } from "./errorModules.ts";
 
-export const ErrorPage:React.FC = () => {
+export const ErrorPage: FC = () => {
     const error: TError = useRouteError();
     let errorTitle = "ErrorPage occurred!";
     let errorMessage = "Something goes wrong";
@@ -28,9 +28,9 @@ export const ErrorPage:React.FC = () => {
         <>
             <MainNavigation />
             <main className={ styles.main }>
-                <TextContent title={ errorTitle }>
+                <TitleContent title={ errorTitle }>
                     <p style={{ fontSize: "25px" }}>{ errorMessage }</p>
-                </TextContent>
+                </TitleContent>
             </main>
             <Footer />
         </>

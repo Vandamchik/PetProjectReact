@@ -1,22 +1,45 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useFetcher } from "react-router-dom";
+import { FormEvent, useEffect, useRef, FC  } from 'react';
+import { isEmail, isNotEmpty, hasMinLength } from '../../services/validation.ts';
 
 import styles from './AuthForm.module.scss';
 
-import { BasicInput } from "../../UI/BasicInput.tsx";
+import { BasicInput } from "../../UI/Inputs/BasicInput.tsx";
+import { BasicCheckbox } from "../../UI/Inputs/BasicCheckbox.tsx";
+import { useInputHook } from "../../hooks/useInputHook.ts";
 
-export const AuthForm: React.FC = () => {
+
+export const AuthForm: FC = () => {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef= useRef<HTMLInputElement>(null);
     const nameRef = useRef<HTMLInputElement>(null);
-    const [isPassShow, setIsPassShow]  = useState<boolean>(false);
-    const [emailInput, setEmailInput] = useState<string>('');
-    const [passwordInput, setPasswordInput] = useState<string>('');
-    const [nameInput, setNameInput] = useState<string>('');
-    const fetcher = useFetcher();
-    const { data, state } = fetcher;
+    const showRef = useRef<HTMLInputElement>(null);
+    const {
+        value: emailValue,
+        handleTextInput: handleEmail,
+        handleInputBlur: emailBlur,
+        hasError: emailError
+    } = useInputHook<string>('', isEmail, isNotEmpty);
+    const {
+        value: passwordValue,
+        handleTextInput: handlePass,
+        handleInputBlur: passBlur,
+        hasError: passwordError
+    } = useInputHook<string>('', isNotEmpty, hasMinLength);
+    const {
+        value: nameValue,
+        handleTextInput: handleName,
+        handleInputBlur: nameBlur,
+        hasError: nameError
+    } = useInputHook('', isNotEmpty);
+    const {
+        value: isPassShow,
+        handleBooleanInput: handleIsShowPass
+    } = useInputHook<boolean>(false);
 
-    console.log('AuthFormComp', data)
+
+    function formHandler(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+    }
 
     useEffect(() => {
         emailRef.current!.focus()
@@ -24,46 +47,51 @@ export const AuthForm: React.FC = () => {
 
 
     return (
-        <fetcher.Form
+        <form
             className={ styles.formContainer }
-            method='post'
-            action='/auth'
+            onSubmit={ e => formHandler(e) }
         >
+            { emailError && <p>Enter valid email address</p> }
             <BasicInput
                 ref={ emailRef }
                 id='email'
                 name='email'
                 type='email'
-                value={ emailInput }
-                setValue={ setEmailInput }
+                value={ emailValue as string }
+                setValue={ handleEmail }
+                onBlur={ emailBlur }
             />
+            { passwordError && <p>Password must contain minimum 6 symbols</p> }
             <BasicInput
                 ref={ passwordRef }
-                id='password'
+                id='passwordReg'
                 name='password'
                 type={ isPassShow ? 'text' : 'password' }
-                value={ passwordInput }
-                setValue={ setPasswordInput }
+                value={ passwordValue as string }
+                setValue={ handlePass }
+                onBlur={ passBlur }
             />
-            <label htmlFor='showPassword'>Show password</label>
-            <input
-                type='checkbox'
+            <BasicCheckbox
+                title='Show Password'
                 id='showPassword'
+                ref={ showRef }
                 name='showPassword'
                 value={`${isPassShow}`}
-                onChange={() => setIsPassShow(prevState => !prevState)}
+                setValue={ () => handleIsShowPass() }
             />
+            { nameError && <p>Name is required</p> }
             <BasicInput
                 ref={ nameRef }
                 id='password'
                 name='name'
                 type='text'
-                value={ nameInput }
-                setValue={ setNameInput }
+                value={ nameValue as string }
+                setValue={ handleName }
+                onBlur={ nameBlur }
             />
             <button type='submit' >
-                {state === 'submitting' ? 'Submitting' : 'Create an account'}
+                Submit
             </button>
-        </fetcher.Form>
+        </form>
     );
 };

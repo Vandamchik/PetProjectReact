@@ -1,6 +1,6 @@
-import React from 'react';
+import { FC } from 'react';
 
-export const FavoritesPage:React.FC = () => {
+export const FavoritesPage: FC = () => {
     return (
         <div>
             Favorites Page

@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 
 import { MainHeader } from './MainHeader.tsx';
 import { NavBar } from "./NavBar.tsx";
@@ -7,7 +7,7 @@ import { NavLinks } from "./NavLinks.tsx";
 import styles from './MainNavigation.module.scss';
 
 
-export const MainNavigation:React.FC = () => {
+export const MainNavigation: FC = () => {
     return (
         <>
             <MainHeader className={ styles.header }>
