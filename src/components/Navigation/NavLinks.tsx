@@ -1,10 +1,10 @@
-import React from 'react';
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import styles from './NavLinks.module.scss';
 
 
-export const NavLinks:React.FC = () => {
+export const NavLinks: FC = () => {
 
     return (
         <ul className={ styles.container }>

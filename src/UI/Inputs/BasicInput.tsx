@@ -1,21 +1,21 @@
-import React, { HTMLAttributes } from 'react';
+import { FC, Ref, forwardRef, HTMLAttributes, ChangeEvent } from 'react';
 
 interface IBasicInput extends HTMLAttributes<HTMLInputElement> {
     id: string;
     name: string;
     type: string;
     value: string;
-    setValue: (text: string) => void;
-    ref: React.Ref<HTMLInputElement | null>;
+    setValue: (e: ChangeEvent<HTMLInputElement>) => void;
+    ref: Ref<HTMLInputElement | null>;
 }
-export const BasicInput: React.FC<IBasicInput> = React.forwardRef((props, ref) => {
-    const { id, type, name, value, setValue } = props;
+export const BasicInput: FC<IBasicInput> = forwardRef((props, ref) => {
+    const { id, type, name, value, setValue, onBlur } = props;
 
     const labelName = name.charAt(0).toUpperCase() + name.slice(1);
 
     return (
         <>
-            <label>{ labelName }</label>
+            <label htmlFor={ name }>{ labelName }</label>
             <input
                 id={ id }
                 placeholder={ `Enter your ${ name }` }
@@ -23,9 +23,8 @@ export const BasicInput: React.FC<IBasicInput> = React.forwardRef((props, ref) =
                 type={ type }
                 value={ value }
                 ref={ ref }
-                onChange={e =>
-                    setValue((e.target as HTMLInputElement).value.trim())
-                }
+                onChange={e => setValue(e) }
+                onBlur={ onBlur }
             />
         </>
     );
