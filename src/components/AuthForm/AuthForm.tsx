@@ -6,9 +6,13 @@ import styles from './AuthForm.module.scss';
 import { BasicInput } from "../../UI/Inputs/BasicInput.tsx";
 import { BasicCheckbox } from "../../UI/Inputs/BasicCheckbox.tsx";
 import { useInputHook } from "../../hooks/useInputHook.ts";
+import { useAppDispatch } from "../../store/storeHooks/redux.ts";
+import { fetchRegistrationCreator } from '../../store/reducers/authorization/creator/fetchRegistrationCreator.ts';
 
 
 export const AuthForm: FC = () => {
+    const dispatch = useAppDispatch();
+    // const { user, isLogin } = useAppSelector(state => state.authenticationReducer);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef= useRef<HTMLInputElement>(null);
     const nameRef = useRef<HTMLInputElement>(null);
@@ -39,6 +43,7 @@ export const AuthForm: FC = () => {
 
     function formHandler(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        dispatch(fetchRegistrationCreator({email: emailValue,password: passwordValue,name:  nameValue}))
     }
 
     useEffect(() => {
