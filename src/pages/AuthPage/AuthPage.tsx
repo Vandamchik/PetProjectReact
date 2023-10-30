@@ -24,7 +24,7 @@ export const AuthPage: FC = () => {
                 <AuthForm />
                 < hr />
                 <LogInForm />
-                <button onClick={btnHandler} type='button'>
+                <button onClick={ btnHandler } type='button'>
                     Logout
                 </button>
             </div>

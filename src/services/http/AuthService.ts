@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-import $api from './index.ts';
+import $api from './authHttpInterceptors.ts';
 import { IAuthResponse } from "./httpResponseModels.ts";
 
 export class AuthService {

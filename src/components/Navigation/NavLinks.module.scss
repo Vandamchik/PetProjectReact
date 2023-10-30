@@ -1,32 +1,123 @@
 .container {
   padding-left: 0;
-  width: 50%;
-  height: 50%;
+  margin: 0;
   display: flex;
-  flex-direction: row;
-  align-self: center;
-  justify-content: space-around;
   list-style-type: none;
 
   li {
-    height: 50px;
-    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+    min-width: 200px;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 28px;
     text-decoration: none;
+
+    .icons_container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      a {
+        padding: 5px;
+        width: 70px;
+      }
+
+      a:nth-last-child(1).active {
+        circle {
+          fill: white;
+          stroke-width: 1;
+          stroke: #303030;
+        }
+      }
+
+      a:nth-last-child(1):hover {
+
+        circle {
+          fill: white;
+          stroke-width: 1;
+          stroke: #303030;
+        }
+      }
+
+      a:nth-last-child(2) {
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+        }
+      }
+
+      a:nth-last-child(2).active {
+
+        div {
+          border: 1px solid black;
+          background-color: white;
+          border-radius: 50%;
+        }
+
+      }
+
+      a:nth-last-child(2):hover {
+
+        div {
+          border: 1px solid black;
+          background-color: white;
+          border-radius: 50%;
+        }
+
+      }
+
+      a:nth-last-child(3) {
+        div {
+          width: 50px;
+          height: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      a:nth-last-child(3):hover {
+
+        div {
+          border: 1px solid black;
+          background-color: white;
+          border-radius: 50%;
+        }
+      }
+
+      a:nth-last-child(3).active {
+
+        div {
+          border: 1px solid black;
+          background-color: white;
+          border-radius: 50%;
+        }
+      }
+
+    }
+  }
+
+  li:nth-last-child(1) {
+    width: 260px;
   }
 
   li a {
     text-decoration: none;
-    color: #f5e6d6;
+    color: #303030;
   }
   li a:hover {
     text-decoration: underline;
-    font-size: 32px;
-    color: #806200;
+    font-size: 30px;
   }
   li a.active {
-    color: #806200;
+    text-decoration: underline;
   }
 }
 

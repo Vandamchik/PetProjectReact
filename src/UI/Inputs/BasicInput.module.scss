@@ -1,0 +1,28 @@
+.basicInput__wrapper {
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+  width: 500px;
+
+  label {
+    font-weight: bold;
+    font-size: 24px;
+    color: #312e2e;
+
+    span {
+      color: #930303;
+      word-wrap: normal;
+      overflow-wrap: normal;
+    }
+  }
+
+  input {
+    margin: 10px 0;
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 20px;
+    outline: none;
+    border: 2px solid black;
+  }
+}

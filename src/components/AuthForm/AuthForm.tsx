@@ -1,18 +1,19 @@
 import { FormEvent, useEffect, useRef, FC  } from 'react';
-import { isEmail, isNotEmpty, hasMinLength } from '../../services/validation.ts';
+import { isEmail, isNotEmpty, hasMinLength } from '../../services/validation/validation.ts';
 
 import styles from './AuthForm.module.scss';
 
 import { BasicInput } from "../../UI/Inputs/BasicInput.tsx";
 import { BasicCheckbox } from "../../UI/Inputs/BasicCheckbox.tsx";
 import { useInputHook } from "../../hooks/useInputHook.ts";
-import { useAppDispatch } from "../../store/storeHooks/redux.ts";
+import { useAppDispatch, useAppSelector } from "../../store/storeHooks/redux.ts";
 import { fetchRegistrationCreator } from '../../store/reducers/authorization/creator/fetchRegistrationCreator.ts';
+import {SubmitFormButton} from "../../UI/Buttons/SubmitFormButton.tsx";
 
 
 export const AuthForm: FC = () => {
     const dispatch = useAppDispatch();
-    // const { user, isLogin } = useAppSelector(state => state.authenticationReducer);
+    const { isLoading  } = useAppSelector(state => state.authenticationReducer);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef= useRef<HTMLInputElement>(null);
     const nameRef = useRef<HTMLInputElement>(null);
@@ -56,21 +57,23 @@ export const AuthForm: FC = () => {
             className={ styles.formContainer }
             onSubmit={ e => formHandler(e) }
         >
-            { emailError && <p>Enter valid email address</p> }
             <BasicInput
                 ref={ emailRef }
                 id='email'
                 name='email'
                 type='email'
+                inputError={ emailError }
+                inputErrorMessage='Enter valid e-mail address'
                 value={ emailValue as string }
                 setValue={ handleEmail }
                 onBlur={ emailBlur }
             />
-            { passwordError && <p>Password must contain minimum 6 symbols</p> }
             <BasicInput
                 ref={ passwordRef }
                 id='passwordReg'
                 name='password'
+                inputErrorMessage='Password must contain minimum 6 symbols'
+                inputError={ passwordError }
                 type={ isPassShow ? 'text' : 'password' }
                 value={ passwordValue as string }
                 setValue={ handlePass }
@@ -84,19 +87,22 @@ export const AuthForm: FC = () => {
                 value={`${isPassShow}`}
                 setValue={ () => handleIsShowPass() }
             />
-            { nameError && <p>Name is required</p> }
             <BasicInput
                 ref={ nameRef }
                 id='password'
                 name='name'
+                inputErrorMessage='Name is required'
+                inputError={ nameError }
                 type='text'
                 value={ nameValue as string }
                 setValue={ handleName }
                 onBlur={ nameBlur }
             />
-            <button type='submit' >
-                Submit
-            </button>
+            <SubmitFormButton
+                pending={ isLoading }
+                title="Submit"
+                loadingTitle='Submitting...'
+            />
         </form>
     );
 };

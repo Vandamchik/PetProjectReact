@@ -4,6 +4,7 @@ import { ErrorPage } from "./pages/ErrorPage/ErrorPage.tsx";
 import { HomePage } from "./pages/HomePage/HomePage.tsx";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage.tsx";
 import { AuthPage } from "./pages/AuthPage/AuthPage.tsx";
+import {ShoppingCartPage} from "./pages/ShoppingCartPage/ShoppingCartPage.tsx";
 
 
 export const publicRoutes = [
@@ -23,6 +24,10 @@ export const publicRoutes = [
             {
                 path: ROUTES.AUTH_PAGE,
                 element: <AuthPage />,
+            },
+            {
+                path: ROUTES.SHOPPING_CART_PAGE,
+                element: <ShoppingCartPage />
             }
         ]
     }
