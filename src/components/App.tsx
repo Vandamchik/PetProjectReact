@@ -16,10 +16,10 @@ export const App: FC = () => {
     if (localStorage.getItem('authToken')) {
       dispatch(fetchCheckAuthCreator())
     }
-  }, [])
+  }, [ dispatch ])
 
   console.log("App",isLogin);
-  console.log('UserEmail', user?.user.email)
+  console.log('UserEmail', user?.user?.email)
 
   return <RouterProvider router={routerPublic} />
 }
