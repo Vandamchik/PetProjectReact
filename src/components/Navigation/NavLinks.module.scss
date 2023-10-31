@@ -104,8 +104,8 @@
     }
   }
 
-  li:nth-last-child(1) {
-    width: 260px;
+  li:nth-last-child(2) {
+    min-width: 260px;
   }
 
   li a {
@@ -120,6 +120,7 @@
     text-decoration: underline;
   }
 }
+
 
 @media (max-width: 1024px) {
   .container li {

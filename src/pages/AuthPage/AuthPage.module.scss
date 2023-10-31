@@ -1,7 +1,6 @@
 .sectionAuth {
   margin: 0 auto;
   width: 800px;
-  //height: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,6 +10,36 @@
     background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+
+    .btnContainer {
+      margin: 10px auto;
+      display: flex;
+      width: 400px;
+      height: 60px;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 28px;
+      font-weight: bold;
+
+
+      a {
+        height: 40px;
+        width: 200px;
+        text-decoration: none;
+        text-align: center;
+        color: #303030;
+      }
+
+      a:hover {
+        text-decoration: underline;
+        font-size: 30px;
+      }
+
+      a.active {
+        text-decoration: underline;
+      }
+    }
   }
 }
