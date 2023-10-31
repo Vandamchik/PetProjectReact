@@ -1,18 +1,20 @@
 import { FormEvent, useEffect, useRef, FC  } from 'react';
-import { isEmail, isNotEmpty, hasMinLength } from '../../services/validation/validation.ts';
+import { useNavigate } from "react-router-dom";
 
-import styles from './AuthForm.module.scss';
+import styles from './BasicFormStyles.module.scss';
 
 import { BasicInput } from "../../UI/Inputs/BasicInput.tsx";
 import { BasicCheckbox } from "../../UI/Inputs/BasicCheckbox.tsx";
 import { useInputHook } from "../../hooks/useInputHook.ts";
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks/redux.ts";
 import { fetchRegistrationCreator } from '../../store/reducers/authorization/creator/fetchRegistrationCreator.ts';
-import {SubmitFormButton} from "../../UI/Buttons/SubmitFormButton.tsx";
+import { SubmitFormButton } from "../../UI/Buttons/SubmitFormButton.tsx";
+import { isEmail, isNotEmpty, hasMinLength } from '../../services/validation/validation.ts';
 
 
-export const AuthForm: FC = () => {
+export const RegistrationForm: FC = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const { isLoading  } = useAppSelector(state => state.authenticationReducer);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef= useRef<HTMLInputElement>(null);
@@ -22,19 +24,22 @@ export const AuthForm: FC = () => {
         value: emailValue,
         handleTextInput: handleEmail,
         handleInputBlur: emailBlur,
-        hasError: emailError
+        hasError: emailError,
+        setEnteredValue: setEmailValue
     } = useInputHook<string>('', isEmail, isNotEmpty);
     const {
         value: passwordValue,
         handleTextInput: handlePass,
         handleInputBlur: passBlur,
-        hasError: passwordError
+        hasError: passwordError,
+        setEnteredValue: setPasswordValue
     } = useInputHook<string>('', isNotEmpty, hasMinLength);
     const {
         value: nameValue,
         handleTextInput: handleName,
         handleInputBlur: nameBlur,
-        hasError: nameError
+        hasError: nameError,
+        setEnteredValue: setNameValue
     } = useInputHook('', isNotEmpty);
     const {
         value: isPassShow,
@@ -44,7 +49,11 @@ export const AuthForm: FC = () => {
 
     function formHandler(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        dispatch(fetchRegistrationCreator({email: emailValue,password: passwordValue,name:  nameValue}))
+        dispatch(fetchRegistrationCreator({email: emailValue,password: passwordValue,name:  nameValue}));
+        navigate(`/confirm-registration/${emailValue}` , { replace: true });
+        setEmailValue('');
+        setPasswordValue('');
+        setNameValue('');
     }
 
     useEffect(() => {

@@ -33,6 +33,7 @@ export function useInputHook<T>(defaultValue: T, ...validationFn: IValidationFun
         handleTextInput,
         handleBooleanInput,
         handleInputBlur,
+        setEnteredValue,
         hasError: didEdit && !valueIsValid
     }
 }

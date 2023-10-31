@@ -7,9 +7,12 @@ interface ISubmitFormButton extends HTMLAttributes<HTMLButtonElement> {
     loadingTitle: string;
     pending: boolean;
 }
+
 export const SubmitFormButton: FC<ISubmitFormButton> = ({ title, pending, loadingTitle}) => {
+
     return (
         <button
+            disabled={ pending }
             type='submit'
             className={ styles.submitForm__btn }
         >
